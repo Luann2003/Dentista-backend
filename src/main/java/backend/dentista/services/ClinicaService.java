@@ -10,7 +10,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import backend.dentista.dto.ClinicaDTO;
 import backend.dentista.entities.Clinica;
+import backend.dentista.entities.Localizacao;
 import backend.dentista.repositories.ClinicaRepository;
+import backend.dentista.repositories.localizacaoRepository;
 import backend.dentista.services.exceptions.DatabaseException;
 import backend.dentista.services.exceptions.ResourceNotFoundException;
 import jakarta.persistence.EntityNotFoundException;
@@ -20,6 +22,9 @@ public class ClinicaService {
 	
 	@Autowired
 	private ClinicaRepository repository;
+	
+	@Autowired
+	private localizacaoRepository localizacaoRepository;
 	
 	@Transactional(readOnly = true)
 	public ClinicaDTO findById(Long id) {
@@ -40,6 +45,16 @@ public class ClinicaService {
 		Clinica entity = new Clinica();
 		copyDtoToEntity(dto, entity);
 		
+		Localizacao localizacao = new Localizacao();
+	    localizacao.setRua(dto.getlocalizacaodto().getRua());
+	    localizacao.setCidade(dto.getlocalizacaodto().getCidade());
+	    localizacao.setEstado(dto.getlocalizacaodto().getEstado());
+	    localizacao.setNumber(dto.getlocalizacaodto().getNumber());
+	    
+	    localizacao = localizacaoRepository.save(localizacao); 
+	    
+		entity.setlocalizacao(localizacao);
+		
 		entity = repository.save(entity);
 		
 		return new ClinicaDTO(entity);
@@ -52,7 +67,8 @@ public class ClinicaService {
 
 			Clinica entity = repository.getReferenceById(id);
 			copyDtoToEntity(dto, entity);
-
+			
+			
 			entity = repository.save(entity);
 			return new ClinicaDTO(entity);
 
@@ -82,7 +98,6 @@ public class ClinicaService {
 		entity.setEmailDentista(dto.getEmailDentista());
 		entity.setEspecialidade(dto.getEspecialidade());
 		entity.setDescription(dto.getDescription());
-		entity.setEndereço(dto.getEndereco());		
 	}
 
 }

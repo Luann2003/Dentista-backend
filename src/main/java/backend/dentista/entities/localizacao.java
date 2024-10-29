@@ -8,18 +8,26 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "tb_localizacao")
-public class localizacao {
+public class Localizacao {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	private String city;
-	private String State;
-	
-	public localizacao(String city, String state) {
-		this.city = city;
-		this.State = state;
+    private String rua;
+    private String cidade;
+    private String estado;
+    private int number;
+    
+    public Localizacao() {
+    }
+
+	public Localizacao(Long id, String rua, String cidade, String estado, int number) {
+		this.id = id;
+		this.rua = rua;
+		this.cidade = cidade;
+		this.estado = estado;
+		this.number = number;
 	}
 
 	public Long getId() {
@@ -30,19 +38,36 @@ public class localizacao {
 		this.id = id;
 	}
 
-	public String getCity() {
-		return city;
+	public String getRua() {
+		return rua;
 	}
 
-	public void setCity(String city) {
-		this.city = city;
+	public void setRua(String rua) {
+		this.rua = rua;
 	}
 
-	public String getState() {
-		return State;
+	public String getCidade() {
+		return cidade;
 	}
 
-	public void setState(String state) {
-		State = state;
+	public void setCidade(String cidade) {
+		this.cidade = cidade;
 	}
+
+	public String getEstado() {
+		return estado;
+	}
+
+	public void setEstado(String estado) {
+		this.estado = estado;
+	}
+
+	public int getNumber() {
+		return number;
+	}
+
+	public void setNumber(int number) {
+		this.number = number;
+	}
+ 
 }

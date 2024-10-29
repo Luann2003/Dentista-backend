@@ -1,6 +1,7 @@
 package backend.dentista.dto;
 
 import backend.dentista.entities.Clinica;
+import backend.dentista.entities.Localizacao;
 
 public class ClinicaDTO {
 	
@@ -10,20 +11,20 @@ public class ClinicaDTO {
 	private String nameDentista;
 	private String especialidade;
 	private String description;
-	private String endereco;
+	private LocalizacaoDTO localizacaodto;
 	
 	public ClinicaDTO() {
 	}
 	
 	public ClinicaDTO(Long id, String name, String emailDentista, String nameDentista, String especialidade, String description,
-			String endereco) {
+			LocalizacaoDTO localizacaodto) {
 		this.id = id;
 		this.name = name;
 		this.emailDentista = emailDentista;
 		this.nameDentista = nameDentista;
 		this.especialidade = especialidade;
 		this.description = description;
-		this.endereco = endereco;
+		this.localizacaodto = localizacaodto;
 	}
 	
 	public ClinicaDTO(Clinica entity) {
@@ -33,7 +34,8 @@ public class ClinicaDTO {
 		nameDentista = entity.getNameDentista();
 		especialidade = entity.getEspecialidade();
 		description = entity.getDescription();
-		endereco = entity.getEndereço();
+
+	   localizacaodto = new LocalizacaoDTO(entity.getlocalizacao());
 	}
 
 	public Long getId() {
@@ -60,7 +62,7 @@ public class ClinicaDTO {
 		return description;
 	}
 
-	public String getEndereco() {
-		return endereco;
+	public LocalizacaoDTO getlocalizacaodto() {
+		return localizacaodto;
 	}
 }

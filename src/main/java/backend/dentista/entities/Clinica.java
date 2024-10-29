@@ -1,9 +1,12 @@
 package backend.dentista.entities;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -19,20 +22,23 @@ public class Clinica {
 	private String nameDentista;
 	private String especialidade;
 	private String description;
-	private String endereco;
+	
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "localizacao_id")
+	private Localizacao localizacao;
 	
 	public Clinica() {
 	}
 
 	public Clinica(Long id, String name, String emailDentista, String nameDentista, String especialidade,
-			String description, String endereço) {
+			String description, Localizacao localizacao) {
 		this.id = id;
 		this.name = name;
 		this.emailDentista = emailDentista;
 		this.nameDentista = nameDentista;
 		this.especialidade = especialidade;
 		this.description = description;
-		this.endereco = endereço;
+		this.localizacao = localizacao;
 	}
 
 	public Long getId() {
@@ -83,11 +89,11 @@ public class Clinica {
 		this.description = description;
 	}
 
-	public String getEndereço() {
-		return endereco;
+	public Localizacao getlocalizacao() {
+		return localizacao;
 	}
 
-	public void setEndereço(String endereço) {
-		this.endereco = endereço;
+	public void setlocalizacao(Localizacao localizacao) {
+		this.localizacao = localizacao;
 	}
 }
