@@ -1,9 +1,9 @@
 package backend.dentista.services;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -34,9 +34,9 @@ public class ClinicaService {
 	}
 	
 	@Transactional(readOnly = true)
-	public List<ClinicaDTO> findAll(){
-		List<Clinica> list = repository.findAll();
-		return list.stream().map(x -> new ClinicaDTO(x)).toList();
+	public Page<ClinicaDTO> findAll(String name, Pageable pageable){
+		Page<Clinica> list = repository.findByNameContaining(name, pageable);
+		return list.map(x -> new ClinicaDTO(x));
 	}
 	
 	@Transactional

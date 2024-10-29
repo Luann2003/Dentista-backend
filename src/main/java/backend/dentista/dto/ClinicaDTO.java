@@ -1,7 +1,7 @@
 package backend.dentista.dto;
 
 import backend.dentista.entities.Clinica;
-import backend.dentista.entities.Localizacao;
+
 
 public class ClinicaDTO {
 	
