@@ -12,7 +12,7 @@ public class ClinicaDTO {
 	private String especialidade;
 	private String description;
 	private LocalizacaoDTO localizacaodto;
-	
+		
 	public ClinicaDTO() {
 	}
 	
@@ -65,4 +65,5 @@ public class ClinicaDTO {
 	public LocalizacaoDTO getlocalizacaodto() {
 		return localizacaodto;
 	}
+	
 }
