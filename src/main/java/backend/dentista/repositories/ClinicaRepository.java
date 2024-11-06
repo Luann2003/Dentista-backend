@@ -10,10 +10,6 @@ import backend.dentista.entities.Clinica;
 
 public interface ClinicaRepository extends JpaRepository<Clinica, Long> {
 	
-	
 	@Query("SELECT c FROM Clinica c WHERE LOWER(c.name) LIKE LOWER(CONCAT('%', :name, '%'))")
 	Page<Clinica> findByNameContaining(@Param("name") String name, Pageable pageable);
-
-
-
 }
